@@ -104,50 +104,50 @@ function drawBoard()
 }
 
 function checkWinner() {
-    // check if current player has a winning hand
-    // only start checking when player x has size number of selections
-    var win = false;
-    var playerSelections = new Array();
+  // check if current player has a winning hand
+  // only start checking when player x has size number of selections
+  var win = false;
+  var playerSelections = new Array();
 
-    if (currentPlayer == 0)
-        playerSelections = player1Selections;
-    else
-	playerSelections = player2Selections;
+  if (currentPlayer == 0)
+  playerSelections = player1Selections;
+  else
+  playerSelections = player2Selections;
 
-    if (playerSelections.length >= size) {
-        // check if any 'winners' are also in your selections
+  if (playerSelections.length >= size) {
+    // check if any 'winners' are also in your selections
 
-        for (i = 0; i < winners.length; i++) {
-            var sets = winners[i];  // winning hand
-            var setFound = true;
+    for (i = 0; i < winners.length; i++) {
+      var sets = winners[i];  // winning hand
+      var setFound = true;
 
-            for (r = 0; r < sets.length; r++) {
-                // check if number is in current players hand
-                // if not, break, not winner
-                var found = false;
+      for (r = 0; r < sets.length; r++) {
+        // check if number is in current players hand
+        // if not, break, not winner
+        var found = false;
 
-                // players hand
-                for (s = 0; s < playerSelections.length; s++) {
-                    if (sets[r] == playerSelections[s]) {
-                        found = true;
-                        break;
-                    }
-                }
-
-                // value not found in players hand
-                // not a valid set, move on
-                if (found == false) {
-                    setFound = false;
-                    break;
-                }
-            }
-
-            if (setFound == true) {
-                win = true;
-                break;
-            }
+        // players hand
+        for (s = 0; s < playerSelections.length; s++) {
+          if (sets[r] == playerSelections[s]) {
+            found = true;
+            break;
+          }
         }
-    }
 
-    return win;
+        // value not found in players hand
+        // not a valid set, move on
+        if (found == false) {
+          setFound = false;
+          break;
+        }
+      }
+
+      if (setFound == true) {
+        win = true;
+        break;
+      }
+    }
+  }
+
+  return win;
 }
