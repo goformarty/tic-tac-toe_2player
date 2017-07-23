@@ -8,10 +8,21 @@ var currentPlayer = 0;
 var move = 0;
 var points1 = 0;    // player 1 points
 var points2 = 0;    // player 2 points
+var drawpoints = 0;   // draw points
 var size = 3;
 
 var player1Selections = new Array();
 var player2Selections = new Array();
+
+var clear = document.getElementById('clear');
+clear.addEventListener('click', reset);
+
+function reset() {
+    currentPlayer = 0;
+    player1Selections = new Array();
+    player2Selections = new Array();
+    drawBoard();
+}
 
 
 //answers
@@ -38,7 +49,6 @@ function drawBoard()
     {
       var col = document.createElement("td");
       col.id = counter;
-      col.innerHTML = counter;
 
       function handler(e) {
         if (currentPlayer == 0) {
@@ -55,7 +65,11 @@ function drawBoard()
 
         var isWin = checkWinner();
 
-        if (isWin)
+        if (!isWin && (move === 8)) {
+          drawpoints ++;
+          document.getElementById("draw").innerHTML = drawpoints;
+        }
+        else if (isWin)
         {
           if(currentPlayer == 0)
           points1++;
@@ -87,12 +101,6 @@ function drawBoard()
     }
     parent.appendChild(row);
   }
-}
-
-function reset() {
-    currentPlayer = 0;
-    player1Selections = new Array();
-    player2Selections = new Array();
 }
 
 function checkWinner() {
